@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "665803999922",
+    "project_id": "dronescanning-d8891",
+    "storage_bucket": "dronescanning-d8891.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665803999922:android:19227897b9fa66f520d7ab",
+        "android_client_info": {
+          "package_name": "com.companyname.dronescanning"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMSD71UNbo69a4NJpuSyMz-xWCWGa5KUI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

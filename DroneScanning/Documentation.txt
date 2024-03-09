@@ -1,0 +1,19 @@
+﻿Plugings{
+	Microsoft.Maui.Essentials{
+		````
+			> dotnet add package Microsoft.Maui.Essentials
+		````
+	}
+	Plugin.CloudFirestore{
+		Referencia Documentación: https://github.com/f-miyu/Plugin.CloudFirestore
+		* Instala los siguentes paquetes en Android{
+			> Plugin.CloudFirestore
+			> Xamarin.GooglePlayServices.Base
+		}
+	}
+	Newtonsoft.Json{
+		* Instala en el manejador de pluggings{
+			> Newtonsoft.Json
+		}
+	}
+}

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DroneScanning.View.Pages.HomePage"
+             Title="Registro Logistico">
+
+    <Grid RowDefinitions="Auto,40, *">
+        <HorizontalStackLayout HorizontalOptions="Center" Grid.Row="0" Margin="10">
+            <Grid ColumnDefinitions="*,80">
+                <Frame CornerRadius="10"
+                HeightRequest="60"
+                Padding="0"
+                BorderColor="#CCCCCC"
+                HasShadow="False"
+                BackgroundColor="#F4F4F4"
+                Grid.Column="0">
+                <Entry Placeholder="Ingrese su texto"
+                    x:Name="codeRecord"
+                    PlaceholderColor="#999999"
+                    BackgroundColor="Transparent"
+                    TextColor="#333333"
+                    FontSize="16"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    Margin="10,0"/>
+                </Frame>
+                <Button Text="Registrar" BackgroundColor="#009B5C" Clicked="AddRecord" Grid.Column="1" HeightRequest="60"/>
+            </Grid>
+        </HorizontalStackLayout>
+        <Label Text="Registros" FontSize="20" FontAttributes="Bold" TextColor="Black" Grid.Row="1" HorizontalOptions="Center"/>
+        <Frame Grid.Row="2" BackgroundColor="#f2f2f2" Margin="10">
+            <CollectionView ItemsSource="{Binding Registros}" >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout HorizontalOptions="Center" Margin="10,0">
+                            <StackLayout Orientation="Horizontal" Padding="10">
+                                <Label Text="{Binding RecordName}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Frame>
+    </Grid>
+</ContentPage>
