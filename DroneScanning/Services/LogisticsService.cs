@@ -1,6 +1,5 @@
 ﻿using DroneScanning.Interface;
 using DroneScanning.Models;
-using Firebase.Firestore.Auth;
 using Newtonsoft.Json;
 using Plugin.CloudFirestore;
 using System;
@@ -8,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Xamarin.Io.OpenCensus.Metrics.Export.Summary;
 
 namespace DroneScanning.Services
 {

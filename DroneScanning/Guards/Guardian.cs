@@ -13,7 +13,7 @@ namespace DroneScanning.Guards
             try
             {
                 string result = Preferences.Get("userStorage", string.Empty);
-                if (String.IsNullOrEmpty(result))
+             if (String.IsNullOrEmpty(result))
                 {
                     return false;
                 }
@@ -33,6 +33,7 @@ namespace DroneScanning.Guards
             try
             {
                 Preferences.Remove("userStorage");
+                Preferences.Remove("userId");
             }
             catch (Exception e)
             {

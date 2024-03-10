@@ -4,12 +4,28 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:DroneScanning"
-    Shell.FlyoutBehavior="Disabled"
+    xmlns:viewslayout="clr-namespace:DroneScanning.View.Layout"
+    xmlns:viewspages="clr-namespace:DroneScanning.View.Pages"
+    BackgroundColor="#005780"
     Title="DroneScanning">
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
+        ContentTemplate="{DataTemplate viewslayout:LoginLayout}"
+        FlyoutItemIsVisible="False"
+        Shell.FlyoutBehavior="Disabled"
         Route="MainPage" />
+
+    <FlyoutItem Route="HomePage" FlyoutDisplayOptions="AsMultipleItems">
+        <Tab Title="Inicio" Icon="home.png">
+            <ShellContent ContentTemplate="{DataTemplate viewspages:HomePage}"/>
+        </Tab>
+    </FlyoutItem>
+
+    <Shell.FlyoutFooter>
+        <StackLayout Padding="20">
+            <Button Text="Sign out" Command="{Binding SignOutCommand}" BackgroundColor="#009B5C"/>
+        </StackLayout>
+    </Shell.FlyoutFooter>
 
 </Shell>

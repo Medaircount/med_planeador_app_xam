@@ -1,3 +1,4 @@
+using DroneScanning.Guards;
 using DroneScanning.Interface;
 using DroneScanning.Models;
 using DroneScanning.Services;
@@ -18,6 +19,7 @@ public partial class HomePage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        Shell.SetTabBarIsVisible(this, true);
         try
         {
             List<Record> records = await logistics.GetRecords();
@@ -33,6 +35,13 @@ public partial class HomePage : ContentPage
 
             Console.WriteLine(e.Message.ToString());
         }
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        Guardian guardian = new Guardian(); 
+        guardian.Clean();
     }
 
     public async void AddRecord(object sender, EventArgs e)

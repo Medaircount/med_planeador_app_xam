@@ -19,6 +19,7 @@ public partial class SideMenu : ContentPage
             guardian.Clean();
             //Lo redirigimos al login
             await Navigation.PushAsync(new LoginLayout());
+            //await Shell.Current.GoToAsync("//LoginLayout");
         }
         catch (Exception ex)
         {

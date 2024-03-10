@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using DroneScanning.Models;
 using DroneScanning.Services;
 using DroneScanning.Interface;
+using DroneScanning.View.Pages;
 
 
 namespace DroneScanning.View.Layout;
@@ -49,7 +50,7 @@ public partial class LoginLayout : ContentPage
                 {
                     //Ahora le decimos que vamos a Master
                     //await Shell.Current.GoToAsync("//HomePage");
-                    await Navigation.PushAsync(new MasterLayout());
+                    await Navigation.PushAsync(new HomePage());
                 }
             }
         }
