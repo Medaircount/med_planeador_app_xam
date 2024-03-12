@@ -24,19 +24,18 @@
             Margin="10,0"
             Grid.Row="1"
             Grid.Column="0">
-            <Grid RowDefinitions="60,40,40,50,Auto,40,40,*" 
-              
-              Padding="10"
-          
-              BackgroundColor="#fff">
-                <Label Grid.Row="0" Text="Sign in"
+            <Grid RowDefinitions="60,40,*" 
+                Padding="10"          
+                BackgroundColor="#fff">
+                <Label Grid.Row="0" Text="Solutions"
                    HorizontalOptions="Center"
                    FontSize="Title"
                    FontAttributes="Bold"></Label>
                 <Label Grid.Row="1" Text="Hi there! Nice to see you again."
                    Padding="0" Margin="0"></Label>
-                <StackLayout Grid.Row="2"  Orientation="Vertical" HorizontalOptions="FillAndExpand" >
-                    <Label Text="Email" TextColor="#ff2222" HorizontalOptions="Start" FontAttributes="Bold" FontSize="Subtitle"></Label>
+                <!--<StackLayout Grid.Row="2"  Orientation="Vertical" HorizontalOptions="FillAndExpand" >-->
+                <StackLayout Grid.Row="2">
+                    <Label Text="Usuario" TextColor="#ff2222" HorizontalOptions="Start" FontAttributes="Bold" FontSize="Subtitle"></Label>
                     <Frame Background="Transparent" BorderColor="#005780" Padding="0" HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
                         <StackLayout Orientation="Horizontal">
                             <Frame BackgroundColor="#005780" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
@@ -45,7 +44,7 @@
                             <Entry x:Name="userName" Text="{Binding UserName}" Placeholder="Email" TextColor="#000" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Margin="0,0,20,0"/>
                         </StackLayout>
                     </Frame>
-                    <Label Text="Password" TextColor="#ff2222" HorizontalOptions="Start" FontAttributes="Bold" FontSize="Subtitle"></Label>
+                    <Label Text="Contraseña" TextColor="#ff2222" HorizontalOptions="Start" FontAttributes="Bold" FontSize="Subtitle"></Label>
                     <Frame Background="Transparent" BorderColor="#005780" Padding="0" HorizontalOptions="FillAndExpand" Margin="0,0,0,10">
                         <StackLayout Orientation="Horizontal">
                             <Frame BackgroundColor="#009B5C" HeightRequest="40" WidthRequest="40" CornerRadius="30" Padding="0" Margin="5">
@@ -61,7 +60,7 @@
                     </StackLayout>-->
 
                     <!--<Button Text="SING IN" BackgroundColor="#009B5C" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}"/>-->
-                    <Button Text="SING IN" BackgroundColor="#009B5C" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Clicked="SignIn"/>
+                    <Button Text="Iniciar" BackgroundColor="#009B5C" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Clicked="SignIn"/>
                 </StackLayout>
             </Grid>
         </Border>

@@ -16,7 +16,6 @@
         <NavigationPage>
             <x:Arguments>
                 <Views:HomePage/>
-                <!--<local:MainPage/>-->
             </x:Arguments>
         </NavigationPage>
     </FlyoutPage.Detail>

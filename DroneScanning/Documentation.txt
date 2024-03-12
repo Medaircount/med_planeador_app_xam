@@ -16,4 +16,9 @@
 			> Newtonsoft.Json
 		}
 	}
+	Plugin.Ble{
+		* Para trabajar con bluetooth instala en el manejador de pluggings{
+			> Plugin.Ble
+		}
+	}
 }

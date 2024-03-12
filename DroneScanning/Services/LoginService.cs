@@ -24,12 +24,15 @@ namespace DroneScanning.Services
                                 .Collection("Users")
                                 .Document(username)
                                 .GetAsync();
-                string tmp1 = JsonConvert.SerializeObject(user.Data);
 
-                User us = JsonConvert.DeserializeObject<User>(tmp1);
-                if (!String.IsNullOrEmpty(us.UserId))
+                User us = user.ToObject<User>();
+
+                if (us != null && us.Password == password)
                 {
                     userTask = us;
+                }
+                else {
+                    await GlobalService.SweetAlert("Usuario o contraseña no valido", "Por favor intente nuevamente");
                 }
             }
             catch (Exception e)

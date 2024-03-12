@@ -10,10 +10,22 @@ public partial class HomePage : ContentPage
 {
     public ObservableCollection<Record> Registros { get; } = new ObservableCollection<Record>();
     readonly ILogistics logistics = new LogisticsService();
+
+    private readonly IBluetoothManager _bluetoothManager;
+    private Entry _entry;
     public HomePage()
 	{
 		InitializeComponent();
         BindingContext = this;
+    }
+    private async void ReceiveTextButton_Clicked(object sender, EventArgs e)
+    {
+        string receivedText = await _bluetoothManager.ReceiveTextAsync();
+        if (!string.IsNullOrEmpty(receivedText))
+        {
+            // Hacer algo con el texto recibido
+            codeRecord.Text = receivedText;
+        }
     }
 
     protected override async void OnAppearing()
