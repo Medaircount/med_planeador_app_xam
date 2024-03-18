@@ -21,7 +21,7 @@ namespace DroneScanning
             base.OnStart();
 
             Routing.RegisterRoute("HomePage", typeof(HomePage));
-            Routing.RegisterRoute("LoginLayout", typeof(LoginLayout));
+            Routing.RegisterRoute("LoginPage", typeof(LoginPage));
 
             Guardian guardian = new Guardian(); 
 
@@ -33,9 +33,9 @@ namespace DroneScanning
             }
             else
             {
-                //Shell.Current.GoToAsync("//LoginLayout");
-                //await Navigation.PushAsync(new LoginLayout());
-                MainPage.Navigation.PushAsync(new LoginLayout());
+                //Shell.Current.GoToAsync("//LoginPage");
+                //await Navigation.PushAsync(new LoginPage());
+                MainPage.Navigation.PushAsync(new LoginPage());
             }
         }
     }

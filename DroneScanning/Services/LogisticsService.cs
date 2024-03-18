@@ -19,6 +19,7 @@ namespace DroneScanning.Services
                 var rcs = await CrossCloudFirestore.Current
                                 .Instance
                                 .Collection("Records")
+                                .LimitTo(5)
                                 .GetAsync();
                 
                 foreach (var document in rcs.Documents)

@@ -6,13 +6,12 @@ using DroneScanning.Services;
 using DroneScanning.Interface;
 using DroneScanning.View.Pages;
 
+namespace DroneScanning.View.Pages;
 
-namespace DroneScanning.View.Layout;
-
-public partial class LoginLayout : ContentPage
+public partial class LoginPage : ContentPage
 {
     readonly ILoginRepository loginRepository = new LoginService();
-    public LoginLayout()
+    public LoginPage()
 	{
 		InitializeComponent();
 	}
@@ -47,7 +46,8 @@ public partial class LoginLayout : ContentPage
             else
             {
                 User userInfo = await loginRepository.Login(un, pw);
-                if (userInfo != null) { 
+                if (userInfo != null)
+                {
                     string us = Preferences.Get("userStorage", string.Empty);
                     if (!String.IsNullOrEmpty(us))
                     {

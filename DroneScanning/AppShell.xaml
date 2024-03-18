@@ -9,9 +9,9 @@
     BackgroundColor="#005780"
     Title="DroneScanning">
 
-    <ShellContent
+    <!--<ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate viewslayout:LoginLayout}"
+        ContentTemplate="{DataTemplate viewslayout:LoginPage}"
         FlyoutItemIsVisible="False"
         Shell.FlyoutBehavior="Disabled"
         Route="MainPage" />
@@ -20,11 +20,12 @@
         <Tab Title="Inicio" Icon="home.png">
             <ShellContent ContentTemplate="{DataTemplate viewspages:HomePage}"/>
         </Tab>
-    </FlyoutItem>
+    </FlyoutItem>-->
 
     <Shell.FlyoutFooter>
         <StackLayout Padding="20">
-            <Button Text="Sign out" Command="{Binding SignOutCommand}" BackgroundColor="#009B5C"/>
+            <!--<Button Text="Sign out" Command="{Binding SignOutCommand}" BackgroundColor="#009B5C"/>-->
+            <Button Text="Cerrar Sesión" BackgroundColor="#009B5C" Clicked="SignOut"/>
         </StackLayout>
     </Shell.FlyoutFooter>
 

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Android.Bluetooth;
 using DroneScanning.Interface;
 using Java.Util;
-using DroneScanning.Interface;
 
 namespace DroneScanning.Platforms.Android
 {

@@ -1,7 +1,9 @@
+using Android.Content;
 using DroneScanning.Guards;
 using DroneScanning.Interface;
 using DroneScanning.Models;
 using DroneScanning.Services;
+using Microsoft.Maui.Controls;
 using System.Collections.ObjectModel;
 
 namespace DroneScanning.View.Pages;
@@ -12,20 +14,12 @@ public partial class HomePage : ContentPage
     readonly ILogistics logistics = new LogisticsService();
 
     private readonly IBluetoothManager _bluetoothManager;
-    private Entry _entry;
+    private readonly IFloatingWindowService floatingWindowService;
     public HomePage()
 	{
 		InitializeComponent();
         BindingContext = this;
-    }
-    private async void ReceiveTextButton_Clicked(object sender, EventArgs e)
-    {
-        string receivedText = await _bluetoothManager.ReceiveTextAsync();
-        if (!string.IsNullOrEmpty(receivedText))
-        {
-            // Hacer algo con el texto recibido
-            codeRecord.Text = receivedText;
-        }
+        floatingWindowService = DependencyService.Get<IFloatingWindowService>();
     }
 
     protected override async void OnAppearing()
@@ -46,6 +40,34 @@ public partial class HomePage : ContentPage
         {
 
             Console.WriteLine(e.Message.ToString());
+        }
+    }
+
+    private async void ReceiveTextButton_Clicked(object sender, EventArgs e)
+    {
+        string receivedText = await _bluetoothManager.ReceiveTextAsync();
+        if (!string.IsNullOrEmpty(receivedText))
+        {
+            // Hacer algo con el texto recibido
+            codeRecord.Text = receivedText;
+        }
+    }
+
+    private void FloatingWindow(object sender, EventArgs e)
+    {
+        try
+        {
+            if (floatingWindowService != null)
+            {
+                floatingWindowService.ShowFloatingWindow();
+            }
+            else { 
+                DependencyService.Get<IFloatingWindowService>().ShowFloatingWindow();
+            } 
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
         }
     }
 

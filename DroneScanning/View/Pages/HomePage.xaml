@@ -4,7 +4,7 @@
              x:Class="DroneScanning.View.Pages.HomePage"
              Title="Registro Logistico">
 
-    <Grid RowDefinitions="Auto,Auto, *">
+    <Grid RowDefinitions="Auto,Auto, *, Auto">
         <HorizontalStackLayout HorizontalOptions="Center" Grid.Row="0" Margin="10">
             <Grid ColumnDefinitions="*,80">
                 <Frame CornerRadius="10"
@@ -14,15 +14,6 @@
                 HasShadow="False"
                 BackgroundColor="#F4F4F4"
                 Grid.Column="0">
-                <!--<Entry Placeholder="Ingrese su texto"
-                    x:Name="codeRecord"
-                    PlaceholderColor="#999999"
-                    BackgroundColor="Transparent"
-                    TextColor="#333333"
-                    FontSize="16"
-                    VerticalOptions="CenterAndExpand"
-                    HorizontalOptions="FillAndExpand"
-                    Margin="10,0"/>-->
                 </Frame>
                 <Frame Background="Transparent" BorderColor="#005780" Padding="10,0" HorizontalOptions="FillAndExpand" Margin="0">
                     <Entry x:Name="codeRecord" Placeholder="Code:" TextColor="#000" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" MinimumWidthRequest="200" />
@@ -44,5 +35,8 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Frame>
+        <FlexLayout JustifyContent="Center" AlignItems="Center" Grid.Row="3">
+            <Button Text="¡Empecemos!" BackgroundColor="#009B5C" Clicked="FloatingWindow" HeightRequest="60" />
+        </FlexLayout>
     </Grid>
 </ContentPage>

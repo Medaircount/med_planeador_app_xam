@@ -21,4 +21,21 @@
 			> Plugin.Ble
 		}
 	}
+	Xamarin.Essentials{
+		* Instala en el manejador de pluggings{
+			> Xamarin.Essentials
+		}
+	}
+	Xamarin.Forms (Se tuvo que realizar un "Reverse"){
+		* Instala en el manejador de pluggings{
+			> Xamarin.AndroidX.Lifecycle.LiveData
+			> Xamarin.Google.Android.Material
+			> Xamarin.AndroidX.Navigation.UI
+			> Xamarin.Forms
+		}
+	}
+}
+Floating_Windows_Layout{
+	> Tiene que estar localizado en "Android/Resources/Layout"
+	> Verifica que no este excluido y que además este "Build Action" como "AndroidResource"
 }
