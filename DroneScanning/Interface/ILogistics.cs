@@ -10,6 +10,6 @@ namespace DroneScanning.Interface
     public interface ILogistics
     {
         internal Task<List<Record>> GetRecords();
-        internal Task<Record> Register(string userId, string record, string recordid);
+        internal Task<Record> Register(string userId, string record, string recordid, string contentCreated);
     }
 }

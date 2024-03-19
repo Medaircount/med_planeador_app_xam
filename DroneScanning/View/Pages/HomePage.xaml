@@ -3,40 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DroneScanning.View.Pages.HomePage"
              Title="Registro Logistico">
-
-    <Grid RowDefinitions="Auto,Auto, *, Auto">
-        <HorizontalStackLayout HorizontalOptions="Center" Grid.Row="0" Margin="10">
-            <Grid ColumnDefinitions="*,80">
-                <Frame CornerRadius="10"
-                HeightRequest="60"
-                Padding="0"
-                BorderColor="#CCCCCC"
-                HasShadow="False"
-                BackgroundColor="#F4F4F4"
-                Grid.Column="0">
-                </Frame>
-                <Frame Background="Transparent" BorderColor="#005780" Padding="10,0" HorizontalOptions="FillAndExpand" Margin="0">
-                    <Entry x:Name="codeRecord" Placeholder="Code:" TextColor="#000" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" MinimumWidthRequest="200" />
-                </Frame>
-                <Button Text="Registrar" BackgroundColor="#009B5C" Clicked="AddRecord" Grid.Column="1" HeightRequest="60"/>
-            </Grid>
-        </HorizontalStackLayout>
-        <Label Text="Registros" FontSize="20" FontAttributes="Bold" TextColor="Black" Grid.Row="1" HorizontalOptions="Center" Margin="0,20,0,20"/>
-        <Frame Grid.Row="2" BackgroundColor="#f2f2f2" Margin="10">
-            <CollectionView ItemsSource="{Binding Registros}" >
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout HorizontalOptions="Center" Margin="10,0">
-                            <StackLayout Orientation="Horizontal" Padding="10">
-                                <Label Text="{Binding RecordName}" />
+    <ScrollView>
+        <Grid RowDefinitions="Auto,Auto, *, Auto, Auto" MaximumWidthRequest="300" Margin="0,10">
+            <StackLayout Grid.Row="0">
+                <FlexLayout Direction="Column" JustifyContent="Center">
+                    <Frame Grid.Row="0" Background="Transparent" BorderColor="#005780" Padding="10,0" HorizontalOptions="FillAndExpand" Margin="0">
+                        <Entry x:Name="codeRecord" TextChanged="AddRecordText" Placeholder="Code:" TextColor="#000" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" MinimumWidthRequest="200"/>
+                        <!--<Entry x:Name="codeRecord" Unfocused="AddRecord" Placeholder="Code:" TextColor="#000" FontAttributes="Bold" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" MinimumWidthRequest="200" />-->
+                    </Frame>
+                    <Button Grid.Row="1" Text="Registrar" BackgroundColor="#009B5C" Clicked="AddRecordButton" Margin="0,5" CommandParameter="-"/>
+                </FlexLayout>
+            </StackLayout>
+            <Label Text="Registros" FontSize="20" FontAttributes="Bold" TextColor="Black" Grid.Row="1" HorizontalOptions="Center" Margin="0,20,0,20"/>
+            <Frame Grid.Row="2" BackgroundColor="#f2f2f2" Margin="10">
+                <CollectionView ItemsSource="{Binding Registros}" >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout HorizontalOptions="Center" Margin="10,0">
+                                <StackLayout Orientation="Horizontal" Padding="10">
+                                    <Label Text="{Binding RecordName}" />
+                                </StackLayout>
                             </StackLayout>
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Frame>
-        <FlexLayout JustifyContent="Center" AlignItems="Center" Grid.Row="3">
-            <Button Text="¡Empecemos!" BackgroundColor="#009B5C" Clicked="FloatingWindow" HeightRequest="60" />
-        </FlexLayout>
-    </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Frame>
+            <Button Text="Novedad" BackgroundColor="#009B5C" Clicked="AddRecordButton" Grid.Row="3" CommandParameter="1"/>
+            <Button x:Name="miniActionButton" Text="Minimizar" BackgroundColor="#005780" Clicked="OnMinimizeClicked" Grid.Row="4" Margin="0,10,0,20"/>
+        </Grid>
+    </ScrollView>
 </ContentPage>

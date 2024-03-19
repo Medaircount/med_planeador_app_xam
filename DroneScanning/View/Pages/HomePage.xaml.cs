@@ -1,8 +1,8 @@
-using Android.Content;
 using DroneScanning.Guards;
 using DroneScanning.Interface;
 using DroneScanning.Models;
 using DroneScanning.Services;
+using DroneScanning.Platforms.Android;
 using Microsoft.Maui.Controls;
 using System.Collections.ObjectModel;
 
@@ -11,13 +11,15 @@ namespace DroneScanning.View.Pages;
 public partial class HomePage : ContentPage
 {
     public ObservableCollection<Record> Registros { get; } = new ObservableCollection<Record>();
+    TimeSpan scanningDelay = TimeSpan.FromMilliseconds(300);
     readonly ILogistics logistics = new LogisticsService();
+    private bool isMinimized = false;
 
     private readonly IBluetoothManager _bluetoothManager;
     private readonly IFloatingWindowService floatingWindowService;
     public HomePage()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         BindingContext = this;
         floatingWindowService = DependencyService.Get<IFloatingWindowService>();
     }
@@ -43,48 +45,72 @@ public partial class HomePage : ContentPage
         }
     }
 
-    private async void ReceiveTextButton_Clicked(object sender, EventArgs e)
+    protected override void OnDisappearing()
     {
-        string receivedText = await _bluetoothManager.ReceiveTextAsync();
-        if (!string.IsNullOrEmpty(receivedText))
-        {
-            // Hacer algo con el texto recibido
-            codeRecord.Text = receivedText;
-        }
+        base.OnDisappearing();
+        Guardian guardian = new Guardian();
+        guardian.Clean();
     }
 
-    private void FloatingWindow(object sender, EventArgs e)
+    private void OnMinimizeClicked(object sender, EventArgs e)
     {
+        // Obtener el tamaño de la pantalla
         try
         {
-            if (floatingWindowService != null)
+            isMinimized = !isMinimized;
+            var androidWindow = new AndroidWindow();
+
+            if (isMinimized)
             {
-                floatingWindowService.ShowFloatingWindow();
+                // Minimiza
+                androidWindow.SetWindowScale(0.5);
+                miniActionButton.Text = "Normalizar";
             }
-            else { 
-                DependencyService.Get<IFloatingWindowService>().ShowFloatingWindow();
-            } 
+            else
+            {
+                // Restaurar el tamaño original
+                androidWindow.SetWindowScale(1.0);
+                miniActionButton.Text = "Minimizar";
+            }
         }
         catch (Exception ex)
         {
+
             Console.WriteLine(ex.Message);
         }
     }
 
-    protected override void OnDisappearing()
-    {
-        base.OnDisappearing();
-        Guardian guardian = new Guardian(); 
-        guardian.Clean();
+    public async void AddRecordText(object sender, TextChangedEventArgs e) {
+        await Task.Delay(scanningDelay);
+
+        // Guarda solo si viene del scaner 
+        if (e.NewTextValue != codeRecord.Text && !String.IsNullOrEmpty(codeRecord.Text))
+        {
+            string cr = codeRecord.Text;
+            // Lo limpiamos por seguridad
+            codeRecord.Text = string.Empty;
+            AddRecord(cr);
+        }
     }
 
-    public async void AddRecord(object sender, EventArgs e)
+    public void AddRecordButton(object sender, EventArgs e)
     {
-        string cr = !String.IsNullOrEmpty(codeRecord.Text) ? codeRecord.Text : ""; ;
-
+        string parameter = (sender as Button).CommandParameter as string;
+        string cr = codeRecord.Text;
+        AddRecord(cr, parameter);
+    }
+    
+    public async void AddRecord(string text, string? parameter = "") 
+    {
         try
         {
-            // Validar si el campo está vacío o no
+            string cr = text;
+            // Verificar si es novedad
+            if (!String.IsNullOrEmpty(parameter))
+            {
+                cr = parameter == "1" ? parameter : cr;
+            }
+
             if (string.IsNullOrWhiteSpace(cr))
             {
                 // Mostrar mensaje de error si el campo está vacío
@@ -92,25 +118,23 @@ public partial class HomePage : ContentPage
             }
             else
             {
+
                 string nuevoGuid = Guid.NewGuid().ToString();
-
-
+                string now = DateTime.Now.ToString("yyyyMMddTHHmmss");
                 string userid = Preferences.Get("userId", string.Empty);
-                #region tmp
-                if (String.IsNullOrEmpty(userid)) {
-                    // Con el fin de hacer pruebas
-                    userid = "6cba0e76-6f8e-4d68-b9f2-af14c2b2879b";
-                }
-                #endregion
 
-                Record record = await logistics.Register(userid, cr, nuevoGuid);
+                Record record = await logistics.Register(userid, cr, nuevoGuid, now);
 
                 // Agregar el nuevo registro a la colección
-                Registros.Add(new Record { UserId = record.UserId, RecordName= record.RecordName, RecordId = record.RecordId });
-
+                Registros.Insert(0, new Record { UserId = record.UserId, RecordName = record.RecordName, RecordId = record.RecordId });
+                // Nos aseguramos que solo se muestren los 5 primeros
+                if (Registros.Count()>4) { 
+                    Record record1 = Registros.Last();
+                    Registros.Remove(record1);
+                }
                 // Limpiar los campos de entrada después de agregar el registro
                 codeRecord.Text = string.Empty;
-            }
+            }          
         }
         catch (Exception ex)
         {

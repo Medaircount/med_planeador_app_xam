@@ -19,6 +19,7 @@ namespace DroneScanning.Services
                 var rcs = await CrossCloudFirestore.Current
                                 .Instance
                                 .Collection("Records")
+                                .OrderBy("ContentCreated", true)
                                 .LimitTo(5)
                                 .GetAsync();
                 
@@ -43,11 +44,12 @@ namespace DroneScanning.Services
             return records;
         }
 
-        async Task<Record> ILogistics.Register(string userId, string record, string recordid) {
+        async Task<Record> ILogistics.Register(string userId, string record, string recordid, string contentCreated) {
             Record rc = new Record { 
                 UserId = userId,
                 RecordId = recordid,
                 RecordName = record,
+                ContentCreated = contentCreated
             };
             try
             {

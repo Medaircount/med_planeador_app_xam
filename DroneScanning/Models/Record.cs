@@ -11,5 +11,6 @@ namespace DroneScanning.Models
         public string RecordId { get; set; }
         public string RecordName { get; set; }
         public string UserId { get; set; }
+        public string ContentCreated { get; set; }
     }
 }

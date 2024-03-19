@@ -57,6 +57,21 @@ namespace DroneScanning
             }
         }
 
+        //private void OnMinimizeClicked(object sender, EventArgs e)
+        //{
+        //    // Obtener el tamaño de la pantalla
+        //    try
+        //    {
+        //        var androidWindow = new AndroidWindow();
+        //        androidWindow.SetWindowScale(0.5);
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        Console.WriteLine(ex.Message);
+        //    }
+        //}
+
         protected override void OnDisappearing() { 
             base.OnDisappearing();
 
